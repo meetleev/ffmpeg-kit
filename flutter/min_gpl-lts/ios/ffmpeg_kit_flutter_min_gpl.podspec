@@ -28,11 +28,11 @@ Pod::Spec.new do |s|
         if [[ "$PRODUCT_NAME" == *"min-gpl"* ]]; then
           echo "Downloading min-gpl..."
           curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3.zip -o /tmp/min-gpl.zip
-          unzip -o /tmp/min-gpl.zip -d "${PODS_ROOT}/ffmpeg_kit_flutter_min_gpl/Frameworks/min-gpl"
+          unzip -o /tmp/min-gpl.zip -d "${PODS_ROOT}/ffmpeg_kit_flutter_min_gpl/Frameworks"
         elif [[ "$PRODUCT_NAME" == *"min-gpl-lts"* ]]; then
           echo "Downloading min-gpl-lts..."
           curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3-LTS.zip -o /tmp/min-gpl-lts.zip
-          unzip -o /tmp/min-gpl-lts.zip -d "${PODS_ROOT}/ffmpeg_kit_flutter_min_gpl/Frameworks/min-gpl-lts"
+          unzip -o /tmp/min-gpl-lts.zip -d "${PODS_ROOT}/ffmpeg_kit_flutter_min_gpl/Frameworks"
         fi
       fi
     SCRIPT
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
     # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0"
-    ss.vendored_frameworks = 'Frameworks/min-gpl/*.framework'
+    ss.vendored_frameworks = 'Frameworks/*.framework'
     ss.ios.deployment_target = '12.1'
   end
 
@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
     # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0.LTS"
-    ss.vendored_frameworks = 'Frameworks/min-gpl-lts/*.framework'
+    ss.vendored_frameworks = 'Frameworks/*.framework'
     ss.ios.deployment_target = '10'
   end
 
