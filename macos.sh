@@ -18,7 +18,7 @@ source "${BASEDIR}"/scripts/variable.sh
 source "${BASEDIR}"/scripts/function-${FFMPEG_KIT_BUILD_TYPE}.sh
 disabled_libraries=()
 
-# SET DEFAULTS SETTINGS
+## SET DEFAULTS SETTINGS
 enable_default_macos_architectures
 
 # SELECT XCODE VERSION USED FOR BUILDING
