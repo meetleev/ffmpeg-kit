@@ -27,7 +27,7 @@ export DETECTED_NDK_VERSION=$(grep -Eo "Revision.*" "${ANDROID_NDK_ROOT}"/source
 echo -e "\nINFO: Using Android NDK v${DETECTED_NDK_VERSION} provided at ${ANDROID_NDK_ROOT}\n" 1>>"${BASEDIR}"/build.log 2>&1
 echo -e "INFO: Build options: $*\n" 1>>"${BASEDIR}"/build.log 2>&1
 
-## SET DEFAULT BUILD OPTIONS
+# SET DEFAULT BUILD OPTIONS
 export GPL_ENABLED="no"
 DISPLAY_HELP=""
 BUILD_FULL=""

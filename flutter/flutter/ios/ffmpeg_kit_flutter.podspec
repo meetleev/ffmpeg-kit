@@ -44,7 +44,15 @@ Pod::Spec.new do |s|
   s.subspec 'min-gpl-lts' do |ss|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
-    ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0.LTS"
+    # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0.LTS"
+    # ss.vendored_libraries   = 'FFmpegKitLibs/min/libffmpeg-kit.a'
+    ss.vendored_frameworks = 'FFmpegKitLibs/*.framework'
+    ss.prepare_command = <<-CMD
+      mkdir -p FFmpegFrameworks
+      curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3-LTS.zip -o min-gpl-lts.zip
+      unzip -o min-gpl-lts.zip -d FFmpegFrameworks
+      rm min-gpl-lts.zip 
+    CMD
     ss.ios.deployment_target = '10'
   end
 

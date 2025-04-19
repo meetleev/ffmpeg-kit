@@ -240,7 +240,7 @@ done
 echo -n -e "\nDownloading sources: "
 echo -e "INFO: Downloading the source code of ffmpeg and external libraries.\n" 1>>"${BASEDIR}"/build.log 2>&1
 
-## DOWNLOAD GNU CONFIG
+# DOWNLOAD GNU CONFIG
 download_gnu_config
 
 # DOWNLOAD LIBRARY SOURCES
