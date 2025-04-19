@@ -282,7 +282,7 @@ All libraries created can be found under the `prebuilt` directory.
 
     - Log Callback, called when a session generates logs
 
-        ```objectivec
+        ```objective-c
         [FFmpegKitConfig enableLogCallback:^(Log *log) {
             ...
         }];
@@ -311,4 +311,4 @@ All libraries created can be found under the `prebuilt` directory.
 ### 4. Test Application
 
 You can see how `FFmpegKit` is used inside an application by running `iOS`, `macOS` and `tvOS` test applications 
-developed under the [FFmpegKit Test](https://github.com/arthenica/ffmpeg-kit-test) project.
+developed under the [FFmpegKit Test](https://github.com/arthenica/ffmpeg-kit-test) project. 
