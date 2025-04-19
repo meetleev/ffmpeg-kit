@@ -57,6 +57,9 @@ Pod::Spec.new do |s|
     ss.public_header_files  = 'Classes/**/*.h'
     # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0"
     ss.vendored_frameworks = 'Frameworks/*.framework'
+    ss.xcconfig = {
+      'FRAMEWORK_SEARCH_PATHS' => '$(PODS_ROOT)/ffmpeg_kit_flutter_min_gpl/Frameworks/**'
+    }
     ss.ios.deployment_target = '12.1'
   end
 
@@ -65,6 +68,9 @@ Pod::Spec.new do |s|
     ss.public_header_files  = 'Classes/**/*.h'
     # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0.LTS"
     ss.vendored_frameworks = 'Frameworks/*.framework'
+    ss.xcconfig = {
+      'FRAMEWORK_SEARCH_PATHS' => '$(PODS_ROOT)/ffmpeg_kit_flutter_min_gpl/Frameworks/**'
+    }
     ss.ios.deployment_target = '10'
   end
 
