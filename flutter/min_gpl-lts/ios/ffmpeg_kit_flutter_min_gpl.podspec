@@ -19,25 +19,6 @@ Pod::Spec.new do |s|
 
   s.dependency          'Flutter'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
-
-  s.script_phase = {
-    :name => 'Download FFmpeg Frameworks',
-    :script => <<-SCRIPT
-      set -e
-      if [ "$CONFIGURATION" == "Release" ] || [ "$CONFIGURATION" == "Debug" ]; then
-        if [[ "$PRODUCT_NAME" == *"min-gpl"* ]]; then
-          echo "Downloading min-gpl..."
-          curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3.zip -o /tmp/min-gpl.zip
-          unzip -o /tmp/min-gpl.zip -d "${PODS_ROOT}/ffmpeg_kit_flutter_min_gpl/Frameworks"
-        elif [[ "$PRODUCT_NAME" == *"min-gpl-lts"* ]]; then
-          echo "Downloading min-gpl-lts..."
-          curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3-LTS.zip -o /tmp/min-gpl-lts.zip
-          unzip -o /tmp/min-gpl-lts.zip -d "${PODS_ROOT}/ffmpeg_kit_flutter_min_gpl/Frameworks"
-        fi
-      fi
-    SCRIPT
-  }
-
   s.subspec 'min' do |ss|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
@@ -55,11 +36,7 @@ Pod::Spec.new do |s|
   s.subspec 'min-gpl' do |ss|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
-    # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0"
-    ss.vendored_frameworks = 'Frameworks/*.framework'
-    ss.xcconfig = {
-      'FRAMEWORK_SEARCH_PATHS' => '$(PODS_ROOT)/ffmpeg_kit_flutter_min_gpl/Frameworks/**'
-    }
+    ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0"
     ss.ios.deployment_target = '12.1'
   end
 
@@ -68,9 +45,16 @@ Pod::Spec.new do |s|
     ss.public_header_files  = 'Classes/**/*.h'
     # ss.dependency 'ffmpeg-kit-ios-min-gpl', "6.0.LTS"
     ss.vendored_frameworks = 'Frameworks/*.framework'
-    ss.xcconfig = {
-      'FRAMEWORK_SEARCH_PATHS' => '$(PODS_ROOT)/ffmpeg_kit_flutter_min_gpl/Frameworks/**'
-    }
+    ss.ios.frameworks = 'VideoToolbox'
+    ss.libraries = 'z', 'bz2', 'c++', 'iconv'
+    s.prepare_command = <<-CMD
+        if [ ! -d "./Frameworks" ]; then
+          mkdir -p Frameworks
+          echo "Downloading min-gpl-lts..."
+          curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3-LTS.zip -o /tmp/min-gpl-lts.zip
+          unzip -o /tmp/min-gpl-lts.zip -d Frameworks
+        fi
+    CMD
     ss.ios.deployment_target = '10'
   end
 
