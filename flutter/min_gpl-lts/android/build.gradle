@@ -47,7 +47,30 @@ android {
     }
 }
 
+
+def localAarDir = "$buildDir/libs"
+def aarName = "ffmpeg-kit-min-gpl-6.0.3-LTS.aar"
+def aarFile = "$localAarDir/${aarName}.aar"
+def aarVersion = '6.0.3'
+def aarUrl = "https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/${aarVersion}/${aarName}.aar"
+
+task fetchAAR {
+    doLast {
+        def dest = file(aarFile)
+        if (!dest.exists()) {
+            println "Downloading AAR from: $aarUrl"
+            dest.parentFile.mkdirs()
+            new URL(aarUrl).withInputStream { i ->
+                dest.withOutputStream { it << i }
+            }
+            println "AAR downloaded to: $aarFile"
+        } else {
+            println "AAR already exists: $aarFile"
+        }
+    }
+}
+
 dependencies {
     implementation 'androidx.annotation:annotation:1.5.0'
-    implementation 'com.arthenica:ffmpeg-kit-min-gpl:6.0-2.LTS'
+    implementation files(aarFile)
 }

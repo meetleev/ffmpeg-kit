@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
         if [ ! -d "./Frameworks" ]; then
           mkdir -p Frameworks
           echo "Downloading min-gpl-lts..."
-          curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-6.0.3-LTS.zip -o /tmp/min-gpl-lts.zip
+          curl -L https://github.com/meetleev/ffmpeg-kit-prebuilt/releases/download/6.0.3/ffmpeg-kit-ios-min-gpl-6.0.3-LTS.zip -o /tmp/min-gpl-lts.zip
           unzip -o /tmp/min-gpl-lts.zip -d Frameworks
         fi
     CMD
